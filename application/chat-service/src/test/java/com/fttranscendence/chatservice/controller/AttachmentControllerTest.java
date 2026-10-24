@@ -78,7 +78,8 @@ class AttachmentControllerTest {
     void rejectsUnsupportedTypes(String json) throws Exception {
         mockMvc.perform(authenticatedPost(json))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.error.code").value("VALIDATION_ERROR"));
+                .andExpect(jsonPath("$.error.code").value("VALIDATION_ERROR"))
+                .andExpect(jsonPath("$.error.details.content_type").exists());
         verifyNoInteractions(attachmentService);
     }
 

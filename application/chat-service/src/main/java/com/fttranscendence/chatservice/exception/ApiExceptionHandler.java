@@ -74,12 +74,21 @@ public class ApiExceptionHandler {
     public ResponseEntity<Map<String, Object>> HandleValidation(MethodArgumentNotValidException e) {
         Map<String, Object> details = new LinkedHashMap<>();
         e.getBindingResult().getFieldErrors()
-        .forEach(error -> details.put(error.getField() ,error.getDefaultMessage()));
+        .forEach(error -> details.put(snakeCase(error.getField()) ,error.getDefaultMessage()));
 
         return ResponseEntity.badRequest().body(Map.of("error" ,Map.of(
             "code", "VALIDATION_ERROR",
             "message", "Request body is invalid",
             "details" , details
          )));
+    }
+
+    /**
+     * Field names come from the Java records (attachmentUploadIds); the API is
+     * snake_case, so details must name the JSON field the client actually sent.
+     * An element keeps its index: attachmentUploadIds[0] -> attachment_upload_ids[0].
+     */
+    static String snakeCase(String field) {
+        return field.replaceAll("([a-z0-9])([A-Z])", "$1_$2").toLowerCase();
     }
 }

@@ -299,10 +299,14 @@ class MessageControllerTest {
 
         mockMvc.perform(authenticatedPost("/rooms/42/messages", "{\"attachment_upload_ids\":[" + five + "]}"))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.error.code").value("VALIDATION_ERROR"));
+                .andExpect(jsonPath("$.error.code").value("VALIDATION_ERROR"))
+                // details name the JSON field, snake_case like the request
+                .andExpect(jsonPath("$.error.details.attachment_upload_ids").exists())
+                .andExpect(jsonPath("$.error.details.attachmentUploadIds").doesNotExist());
         mockMvc.perform(authenticatedPost("/rooms/42/messages", "{\"attachment_upload_ids\":[\"../etc\"]}"))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.error.code").value("VALIDATION_ERROR"));
+                .andExpect(jsonPath("$.error.code").value("VALIDATION_ERROR"))
+                .andExpect(jsonPath("$.error.details['attachment_upload_ids[0]']").value("must be an upload_id"));
 
         org.mockito.Mockito.verifyNoInteractions(messageService);
     }

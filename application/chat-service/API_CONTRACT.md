@@ -27,7 +27,9 @@ Every REST error has this shape:
 { "error": { "code": "NOT_A_MEMBER", "message": "User is not a member of the room" } }
 ```
 
-`VALIDATION_ERROR` adds a `details` object, field → message:
+`VALIDATION_ERROR` adds a `details` object, field → message. Fields are named
+as in the JSON body (snake_case); an item of a list keeps its index, e.g.
+`"attachment_upload_ids[0]"`:
 
 ```json
 { "error": { "code": "VALIDATION_ERROR", "message": "Request body is invalid",
@@ -233,7 +235,7 @@ created it. Uploads that are never sent are removed by media-service.
 | Status | Code | When |
 |---|---|---|
 | 403 | `NOT_A_MEMBER` | Caller is not in the room (checked before media is called) |
-| 400 | `VALIDATION_ERROR` | `content_type` missing, or not `image/jpeg`, `image/png` or `image/webp` (`details.contentType`) |
+| 400 | `VALIDATION_ERROR` | `content_type` missing, or not `image/jpeg`, `image/png` or `image/webp` (`details.content_type`) |
 | 503 | `MEDIA_BUSY` | media-service is overloaded: retry |
 | 503 | `MEDIA_UNAVAILABLE` | media-service unreachable |
 
@@ -287,7 +289,7 @@ including to the sender's own sockets (dedupe by `id`).
 | Status | Code | When |
 |---|---|---|
 | 403 | `NOT_A_MEMBER` | Caller is not in the room |
-| 400 | `VALIDATION_ERROR` | `content` longer than 4000, more than 4 upload ids, or an id that is not a UUID (`details.attachmentUploadIds`) |
+| 400 | `VALIDATION_ERROR` | `content` longer than 4000, more than 4 upload ids (`details.attachment_upload_ids`), or an id that is not a UUID (`details["attachment_upload_ids[0]"]`) |
 | 400 | `EMPTY_MESSAGE` | No text (or only blanks) and no images |
 | 400 | `INVALID_REPLY_ID` | `reply_to_id` is not a valid message id |
 | 400 | `REPLY_NOT_FOUND` | Replied-to message does not exist |
