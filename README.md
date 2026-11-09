@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="./gateway-frontend/frontend/public/logo.png" alt="Project Logo" width="200">
+</p>
 *This project has been created as part of the 42 curriculum by asajed, asoudani, mlakhdar, rahmoham, obendaou.*
 
 # Guild Chat — ft_transcendence

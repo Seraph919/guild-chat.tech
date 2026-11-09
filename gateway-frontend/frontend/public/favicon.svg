@@ -1,6 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="8" fill="#101214"/>
-  <path
-    d="M8 12.5A4.5 4.5 0 0 1 12.5 8h7A4.5 4.5 0 0 1 24 12.5v5a4.5 4.5 0 0 1-4.5 4.5H14l-4.8 3.6A.75.75 0 0 1 8 25V12.5Z"
-    fill="#d43347"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Guild Chat logo">
+  <rect width="512" height="512" rx="112" fill="#E53545"/>
+  <!-- Original guild crest / conversation symbol -->
+  <path d="M140 164C170 140 207 128 256 128s86 12 116 36c28 22 43 58 43 99 0 79-58 132-159 132-18 0-35-2-50-5l-58 26 13-60c-41-23-64-61-64-108 0-36 15-65 43-84Z" fill="#FFFFFF"/>
+  <!-- The center cutouts give the mark an expressive, Discord-adjacent personality -->
+  <path d="M177 231c16-14 35-21 58-21v38c-15 0-27 6-36 16Z" fill="#E53545"/>
+  <path d="M335 231c-16-14-35-21-58-21v38c15 0 27 6 36 16Z" fill="#E53545"/>
+  <path d="M204 315c32 25 72 25 104 0" fill="none" stroke="#E53545" stroke-width="20" stroke-linecap="round"/>
 </svg>
